@@ -3,8 +3,23 @@ git_source(:github) {|repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+# レスポンスJSONを制御する
+gem "active_model_serializers"
+
 # railsの起動時間を短縮する（標準gem）
 gem "bootsnap", require: false
+
+gem 'config'
+
+# ユーザー認証を提供する
+gem "devise"
+
+# devise を日本語化する
+gem "devise-i18n"
+
+# ユーザーのトークン認証を提供する
+gem "devise_token_auth", "1.2.2"
+
 
 # MySQLに接続する
 gem "mysql2", "~> 0.5"
@@ -12,13 +27,25 @@ gem "mysql2", "~> 0.5"
 # pumaサーバーを使えるようにする（標準gem）
 gem "puma", "~> 5.0"
 
+gem "rack-cors"
+
 # rails本体（標準gem）
 gem "rails", "~> 7.0.4"
+
+gem "rails-i18n"
+
+gem "kaminari"
+
+gem "enum_help"
 
 # タイムゾーン情報を提供する（標準gem）
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
+  gem "bullet"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "letter_opener_web"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"

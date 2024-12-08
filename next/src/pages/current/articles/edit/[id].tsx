@@ -1,0 +1,201 @@
+import { NextPage } from 'next'
+import { useRequireSignedIn } from '../../../../../hooks/useRequireSignin'
+import { useRouter } from 'next/router'
+import {
+  useSnackbarState,
+  useUserState,
+} from '../../../../../hooks/useGlobalState'
+import { useEffect, useMemo, useState } from 'react'
+import useSWR from 'swr'
+import { fetcher } from '@/utils'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import axios, { AxiosError } from 'axios'
+import Error from '@/components/Error'
+import Loading from '@/components/Loading'
+import { Box, Container, TextField } from '@mui/material'
+import { getAuthApiHeaders } from '@/utils/apiHeaders'
+import { Preview } from '@/components/Preview'
+import { ArticleFormHeader } from '@/components/ArticleFormHeader'
+
+type ArticleProps = {
+  title: string
+  content: string
+  status: string
+}
+
+type ArticleFormData = {
+  title: string
+  content: string
+}
+
+const CurrentArticlesEdit: NextPage = () => {
+  useRequireSignedIn()
+  const router = useRouter()
+  const [user] = useUserState()
+  const [, setSnackbar] = useSnackbarState()
+  const [previewChecked, setPreviewChecked] = useState<boolean>(false)
+  const [statusChecked, setStatusChecked] = useState<boolean>(false)
+  const [isFetched, setIsFetched] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const handleChangePreviewChecked = () => {
+    setPreviewChecked(!previewChecked)
+  }
+
+  const handleChangeStatusChecked = () => {
+    setStatusChecked(!statusChecked)
+  }
+
+  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/current/articles/`
+  const { id } = router.query
+  const { data, error } = useSWR(
+    user.isSignedIn && id ? url + id : null,
+    fetcher
+  )
+
+  const article: ArticleProps = useMemo(() => {
+    if (!data) {
+      return {
+        title: '',
+        content: '',
+        status: false,
+      }
+    }
+    return {
+      title: data.title == null ? '' : data.title,
+      content: data.content == null ? '' : data.content,
+      status: data.status,
+    }
+  }, [data])
+
+  const { handleSubmit, control, reset, watch } = useForm<ArticleFormData>({
+    defaultValues: article,
+  })
+
+  useEffect(() => {
+    if (data) {
+      reset(article)
+      setStatusChecked(article.status == '公開中')
+      setIsFetched(true)
+    }
+  }, [data, article, reset])
+
+  const onSubmit: SubmitHandler<ArticleFormData> = (data) => {
+    if (data.title == '') {
+      return setSnackbar({
+        message: '記事の保存にはタイトルが必要です',
+        severity: 'error',
+        pathname: '/current/articles/edit/[id]',
+      })
+    }
+
+    if (statusChecked && data.content == '') {
+      return setSnackbar({
+        message: '本文なしの記事は公開できません',
+        severity: 'error',
+        pathname: '/current/articles/edit/[id]',
+      })
+    }
+
+    setIsLoading(true)
+
+    const patchUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/current/articles/${id}`
+
+    const headers = getAuthApiHeaders()
+
+    const status = statusChecked ? 'published' : 'draft'
+
+    const patchData = { ...data, status: status }
+
+    axios({
+      method: 'PATCH',
+      url: patchUrl,
+      data: patchData,
+      headers: headers,
+    })
+      .then(() => {
+        setSnackbar({
+          message: '記事を保存しました',
+          severity: 'success',
+          pathname: '/current/articles/edit/[id]',
+        })
+      })
+      .catch((err: AxiosError<{ error: string }>) => {
+        console.log(err.message)
+        setSnackbar({
+          message: '記事の保存に失敗しました',
+          severity: 'error',
+          pathname: '/current/articles/edit/[id]',
+        })
+      })
+    setIsLoading(false)
+  }
+
+  if (error) return <Error />
+  if (!data || !isFetched) return <Loading />
+
+  return (
+    <Box
+      component='form'
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{ backgroundColor: '#EDF2F7', minHeight: '100vh' }}
+    >
+      <ArticleFormHeader
+        previewChecked={previewChecked}
+        statusChecked={statusChecked}
+        isLoading={isLoading}
+        handleChangePreviewChecked={handleChangePreviewChecked}
+        handleChangeStatusChecked={handleChangeStatusChecked}
+      />
+      <Container
+        maxWidth='lg'
+        sx={{ pt: 11, pb: 3, display: 'flex', justifyContent: 'center' }}
+      >
+        {!previewChecked && (
+          <Box sx={{ width: 840 }}>
+            <Box sx={{ mb: 2 }}>
+              <Controller
+                name='title'
+                control={control}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    {...field}
+                    type='text'
+                    error={fieldState.invalid}
+                    helperText={fieldState.error?.message}
+                    placeholder='Write in Title'
+                    fullWidth
+                    sx={{ backgroundColor: 'white' }}
+                  />
+                )}
+              />
+            </Box>
+            <Box>
+              <Controller
+                name='content'
+                control={control}
+                render={({ field, fieldState }) => (
+                  <TextField
+                    {...field}
+                    type='textarea'
+                    error={fieldState.invalid}
+                    helperText={fieldState.error?.message}
+                    multiline
+                    fullWidth
+                    placeholder='Write in Markdown Text'
+                    rows={25}
+                    sx={{ backgroundColor: 'white' }}
+                  />
+                )}
+              />
+            </Box>
+          </Box>
+        )}
+        {previewChecked && (
+          <Preview title={watch('title')} content={watch('content')} />
+        )}
+      </Container>
+    </Box>
+  )
+}
+export default CurrentArticlesEdit
