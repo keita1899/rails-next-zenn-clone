@@ -42,13 +42,15 @@ export const useSignUp = () => {
         pathname: '/',
       })
       router.push('/')
-    } catch (e: AxiosError<{ error: string }>) {
-      console.error(e.message)
-      setSnackbar({
-        message: '不正なユーザー情報です',
-        severity: 'error',
-        pathname: '/sign_up',
-      })
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
+        console.error(e.message)
+        setSnackbar({
+          message: '不正なユーザー情報です',
+          severity: 'error',
+          pathname: '/sign_up',
+        })
+      }
       setIsLoading(false)
     }
   }

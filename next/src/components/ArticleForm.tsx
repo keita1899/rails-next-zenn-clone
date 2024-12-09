@@ -1,3 +1,0 @@
-export const ArticleForm = ({}: ) => {
-  return ()
-}

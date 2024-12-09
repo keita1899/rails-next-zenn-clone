@@ -19,9 +19,9 @@ const ArticleDetail: NextPage = () => {
   if (isLoading) return <Loading />
 
   const articleInfoList = [
-    { icon: <PersonIcon />, label: '著者', value: article?.user.name },
-    { icon: <ArticleIcon />, label: '公開', value: article?.createdAt },
-    { icon: <UpdateIcon />, label: '本文更新', value: article?.updatedAt },
+    { icon: <PersonIcon />, label: '著者', value: article?.user.name || '' },
+    { icon: <ArticleIcon />, label: '公開', value: article?.createdAt || '' },
+    { icon: <UpdateIcon />, label: '本文更新', value: article?.updatedAt || '' },
   ]
 
   return (
@@ -56,12 +56,12 @@ const ArticleDetail: NextPage = () => {
       <Container maxWidth='lg'>
         <Box sx={{ pt: 6, pb: 3 }}>
           <Box sx={{ maxWidth: 840, m: 'auto', textAlign: 'center' }}>
-            <ArticleTitle title={article?.title} />
+            <ArticleTitle title={article?.title || ''} />
           </Box>
           <Typography>{article?.createdAt}に公開</Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: '0 24px' }}>
-          <ArticleMain content={article?.content} />
+          <ArticleMain content={article?.content || ''} />
           <ArticleSidebar articleInfoList={articleInfoList} />
         </Box>
       </Container>

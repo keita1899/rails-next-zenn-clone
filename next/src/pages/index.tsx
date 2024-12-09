@@ -13,7 +13,7 @@ const Index: NextPage = () => {
   const router = useRouter()
   const page = 'page' in router.query ? Number(router.query.page) : 1
 
-  const { articles, meta, isLoading, isError} = useFetchArticles(page)
+  const { articles, meta, isLoading, isError } = useFetchArticles(page)
 
   if (isError) return <Error />
   if (isLoading) return <Loading />
@@ -27,8 +27,8 @@ const Index: NextPage = () => {
       <Container maxWidth='md' sx={{ pt: 6 }}>
         <ArticleCardList articles={articles} />
         <ArticlePagination
-          count={meta.totalPages}
-          page={meta.currentPage}
+          count={meta?.totalPages || 0}
+          page={meta?.currentPage || 0}
           onChange={handleChange}
         />
       </Container>

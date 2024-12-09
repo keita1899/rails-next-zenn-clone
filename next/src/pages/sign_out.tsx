@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import { useEffect } from 'react'
-import { useSignOut } from '../../hooks/useSignOUt'
+import { useSignOut } from '../../hooks/useSignOut'
 
 const SignOut: NextPage = () => {
   const { signOut } = useSignOut()
