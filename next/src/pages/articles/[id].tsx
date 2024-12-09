@@ -1,13 +1,13 @@
-import Error from '@/components/Error'
-import Loading from '@/components/Loading'
 import { Box, Container, Typography } from '@mui/material'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { useFetchArticleDetail } from '../../../hooks/useFetchArticleDetail'
 import { ArticleMain } from '@/components/ArticleMain'
 import { ArticleSidebar } from '@/components/ArticleSidebar'
 import { ArticleTitle } from '@/components/ArticleTitle'
+import Error from '@/components/Error'
+import Loading from '@/components/Loading'
 import { ArticleIcon, PersonIcon, UpdateIcon } from '@/utils/icons'
-import { useFetchArticleDetail } from '../../../hooks/useFetchArticleDetail'
 
 const ArticleDetail: NextPage = () => {
   const router = useRouter()
@@ -21,7 +21,11 @@ const ArticleDetail: NextPage = () => {
   const articleInfoList = [
     { icon: <PersonIcon />, label: '著者', value: article?.user.name || '' },
     { icon: <ArticleIcon />, label: '公開', value: article?.createdAt || '' },
-    { icon: <UpdateIcon />, label: '本文更新', value: article?.updatedAt || '' },
+    {
+      icon: <UpdateIcon />,
+      label: '本文更新',
+      value: article?.updatedAt || '',
+    },
   ]
 
   return (
@@ -47,13 +51,13 @@ const ArticleDetail: NextPage = () => {
           <PersonIcon />
         </Box>
         <Box sx={{ mr: 2 }}>
-          <Typography component='p'>著者:</Typography>
+          <Typography component="p">著者:</Typography>
         </Box>
-        <Typography component='p' sx={{ fontWeight: 'bold', color: 'black' }}>
+        <Typography component="p" sx={{ fontWeight: 'bold', color: 'black' }}>
           {article?.user.name}
         </Typography>
       </Box>
-      <Container maxWidth='lg'>
+      <Container maxWidth="lg">
         <Box sx={{ pt: 6, pb: 3 }}>
           <Box sx={{ maxWidth: 840, m: 'auto', textAlign: 'center' }}>
             <ArticleTitle title={article?.title || ''} />

@@ -1,4 +1,3 @@
-import { ArrowBackSharpIcon } from '@/utils/icons'
 import { LoadingButton } from '@mui/lab'
 import {
   AppBar,
@@ -9,6 +8,7 @@ import {
   Typography,
 } from '@mui/material'
 import Link from 'next/link'
+import { ArrowBackSharpIcon } from '@/utils/icons'
 
 type ArticleFormHeaderProps = {
   previewChecked: boolean
@@ -26,7 +26,7 @@ export const ArticleFormHeader = ({
   handleChangeStatusChecked,
 }: ArticleFormHeaderProps) => {
   return (
-    <AppBar position='fixed' sx={{ backgroundColor: '#EDF2F7' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: '#EDF2F7' }}>
       <Toolbar
         sx={{
           display: 'flex',
@@ -35,7 +35,7 @@ export const ArticleFormHeader = ({
         }}
       >
         <Box sx={{ width: 50 }}>
-          <Link href='/current/articles'>
+          <Link href="/current/articles">
             <IconButton>
               <ArrowBackSharpIcon />
             </IconButton>
@@ -68,8 +68,8 @@ export const ArticleFormHeader = ({
             </Typography>
           </Box>
           <LoadingButton
-            variant='contained'
-            type='submit'
+            variant="contained"
+            type="submit"
             loading={isLoading}
             sx={{
               color: 'white',

@@ -6,15 +6,15 @@ import {
   Container,
   IconButton,
 } from '@mui/material'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import Link from 'next/link'
-import { useUserState } from '../../hooks/useGlobalState'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { getAuthApiHeaders } from '@/utils/apiHeaders'
-import axios, { AxiosError, AxiosResponse } from 'axios'
-import { Logo } from './Logo'
-import { PersonIcon } from '@/utils/icons'
+import { useUserState } from '../../hooks/useGlobalState'
 import HeaderMenu from './HeaderMenu'
+import { Logo } from './Logo'
+import { getAuthApiHeaders } from '@/utils/apiHeaders'
+import { PersonIcon } from '@/utils/icons'
 
 const Header = () => {
   const router = useRouter()
@@ -49,7 +49,7 @@ const Header = () => {
 
   return (
     <AppBar
-      position='static'
+      position="static"
       sx={{
         backgroundColor: 'white',
         color: 'black',
@@ -57,7 +57,7 @@ const Header = () => {
         py: '12px',
       }}
     >
-      <Container maxWidth='lg' sx={{ px: 2 }}>
+      <Container maxWidth="lg" sx={{ px: 2 }}>
         <Box
           sx={{
             display: 'flex',
@@ -71,8 +71,8 @@ const Header = () => {
               {!user.isSignedIn && (
                 <Box>
                   <Button
-                    color='primary'
-                    variant='contained'
+                    color="primary"
+                    variant="contained"
                     sx={{
                       color: 'white',
                       textTransform: 'none',
@@ -86,10 +86,10 @@ const Header = () => {
                   >
                     Sign in
                   </Button>
-                  <Link href='/sign_up'>
+                  <Link href="/sign_up">
                     <Button
-                      color='primary'
-                      variant='outlined'
+                      color="primary"
+                      variant="outlined"
                       sx={{
                         textTransform: 'none',
                         fontSize: 16,
@@ -113,8 +113,8 @@ const Header = () => {
                   </IconButton>
                   <Box sx={{ ml: 2 }}>
                     <Button
-                      color='primary'
-                      variant='contained'
+                      color="primary"
+                      variant="contained"
                       sx={{
                         color: 'white',
                         textTransform: 'none',

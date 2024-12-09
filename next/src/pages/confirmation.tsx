@@ -1,8 +1,8 @@
+import axios, { AxiosError } from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useSnackbarState } from '../../hooks/useGlobalState'
 import { useEffect } from 'react'
-import axios, { AxiosError } from 'axios'
+import { useSnackbarState } from '../../hooks/useGlobalState'
 
 const Conrimation: NextPage = () => {
   const router = useRouter()

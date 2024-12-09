@@ -6,7 +6,11 @@ type ArticlePaginationProps = {
   onChange: (event: React.ChangeEvent<unknown>, value: number) => void
 }
 
-export const ArticlePagination = ({ count, page, onChange }: ArticlePaginationProps) => {
+export const ArticlePagination = ({
+  count,
+  page,
+  onChange,
+}: ArticlePaginationProps) => {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
       <Pagination count={count} page={page} onChange={onChange} />

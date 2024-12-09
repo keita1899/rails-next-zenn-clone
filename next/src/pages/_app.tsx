@@ -5,11 +5,11 @@ import { AppProps } from 'next/app'
 import * as React from 'react'
 import '@/styles/destyle.css'
 
+import { Header } from '@/components'
+import { CurrentUserFetch } from '@/components/CurrentUserFetch'
+import Snackbar from '@/components/Snackbar'
 import createEmotionCache from '@/styles/createEmotionCache'
 import theme from '@/styles/theme'
-import { Header } from '@/components'
-import Snackbar from '@/components/Snackbar'
-import { CurrentUserFetch } from '@/components/CurrentUserFetch'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()

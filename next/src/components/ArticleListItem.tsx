@@ -1,3 +1,4 @@
+import EditIcon from '@mui/icons-material/Edit'
 import {
   Avatar,
   Box,
@@ -6,9 +7,8 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import EditIcon from '@mui/icons-material/Edit'
-import { ArticleStatus } from './ArticleStatus'
 import Link from 'next/link'
+import { ArticleStatus } from './ArticleStatus'
 import { ChevronRightIcon } from '@/utils/icons'
 
 type ArticleProps = {
@@ -34,7 +34,7 @@ export const ArticleListItem = ({ article }: ArticleItemProps) => {
       >
         <Box sx={{ width: 'auto', pr: 3 }}>
           <Typography
-            component='h3'
+            component="h3"
             sx={{
               fontSize: { xs: 16, sm: 18 },
               color: 'black',
@@ -57,7 +57,7 @@ export const ArticleListItem = ({ article }: ArticleItemProps) => {
           <Box>
             <Link href={`/current/articles/edit/${article.id}`}>
               <Avatar>
-                <Tooltip title='編集する'>
+                <Tooltip title="編集する">
                   <IconButton sx={{ backgroundColor: '#F1F5FA' }}>
                     <EditIcon sx={{ color: '#99AAB6' }} />
                   </IconButton>
@@ -68,7 +68,7 @@ export const ArticleListItem = ({ article }: ArticleItemProps) => {
           <Box>
             <Link href={`/current/articles/${article.id}`}>
               <Avatar>
-                <Tooltip title='表示を確認'>
+                <Tooltip title="表示を確認">
                   <IconButton sx={{ backgroundColor: '#F1F5FA' }}>
                     <ChevronRightIcon sx={{ color: '#99AAB6' }} />
                   </IconButton>

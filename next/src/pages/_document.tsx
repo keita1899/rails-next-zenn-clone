@@ -16,13 +16,13 @@ import theme from '@/styles/theme'
 export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
-      <Html lang='ja'>
+      <Html lang="ja">
         <Head>
           {/* PWA primary color */}
-          <meta name='theme-color' content={theme.palette.primary.main} />
+          <meta name="theme-color" content={theme.palette.primary.main} />
           <link
-            rel='stylesheet'
-            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
         </Head>
         <body>

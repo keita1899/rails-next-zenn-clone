@@ -10,8 +10,8 @@ type LogoProps = {
 export const Logo = ({ width, height }: LogoProps) => {
   return (
     <Box>
-      <Link href='/'>
-        <Image src='/logo.png' width={width} height={height} alt='logo' />
+      <Link href="/">
+        <Image src="/logo.png" width={width} height={height} alt="logo" />
       </Link>
     </Box>
   )

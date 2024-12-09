@@ -1,5 +1,5 @@
-import { ArticleIcon, SettingsIcon } from '@/utils/icons'
 import { Box, Container, Typography } from '@mui/material'
+import { ArticleIcon, SettingsIcon } from '@/utils/icons'
 
 type ArticleHeaderInfoProps = {
   status: string
@@ -23,7 +23,7 @@ export const ArticleHeaderInfo = ({
       }}
     >
       <Container
-        maxWidth='sm'
+        maxWidth="sm"
         sx={{
           display: 'flex',
           justifyContent: 'space-around',
@@ -34,7 +34,7 @@ export const ArticleHeaderInfo = ({
         <Box sx={{ display: 'flex', gap: '0 8px' }}>
           <SettingsIcon />
           <Typography
-            component='p'
+            component="p"
             sx={{ mr: 1, fontSize: { xs: 14, sm: 16 } }}
           >
             ステータス: {status}
@@ -43,7 +43,7 @@ export const ArticleHeaderInfo = ({
         <Box sx={{ display: 'flex', gap: '0 8px' }}>
           <ArticleIcon />
           <Typography
-            component='p'
+            component="p"
             sx={{ mr: 1, fontSize: { xs: 14, sm: 16 } }}
           >
             公開: {createdAt}

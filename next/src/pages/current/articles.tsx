@@ -1,18 +1,14 @@
+import { Box, Container, Typography } from '@mui/material'
+import camelcaseKeys from 'camelcase-keys'
 import { NextPage } from 'next'
-import { useRequireSignedIn } from '../../../hooks/useRequireSignin'
-import {
-  Box,
-  Container,
-  Typography,
-} from '@mui/material'
-import { styles } from '@/styles'
 import useSWR from 'swr'
-import { fetcher } from '@/utils'
 import { useUserState } from '../../../hooks/useGlobalState'
+import { useRequireSignedIn } from '../../../hooks/useRequireSignin'
+import { ArticleListItem } from '@/components/ArticleListItem'
 import Error from '@/components/Error'
 import Loading from '@/components/Loading'
-import camelcaseKeys from 'camelcase-keys'
-import { ArticleListItem } from '@/components/ArticleListItem'
+import { styles } from '@/styles'
+import { fetcher } from '@/utils'
 
 type ArticleProps = {
   id: number
@@ -40,9 +36,9 @@ const CurrentArticles: NextPage = () => {
         pb: 8,
       }}
     >
-      <Container maxWidth='md' sx={{ pt: 6, px: 4 }}>
+      <Container maxWidth="md" sx={{ pt: 6, px: 4 }}>
         <Box sx={{ mb: 4 }}>
-          <Typography component='h2' sx={{ fontSize: 32, fontWeight: 'bold' }}>
+          <Typography component="h2" sx={{ fontSize: 32, fontWeight: 'bold' }}>
             記事の管理
           </Typography>
         </Box>

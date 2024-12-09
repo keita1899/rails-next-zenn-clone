@@ -18,7 +18,7 @@ const SuccessSnackbar = () => {
   // 閉じる
   const handleClose = (
     event: React.SyntheticEvent | Event,
-    reason?: string
+    reason?: string,
   ) => {
     if (reason === 'clickaway') {
       return

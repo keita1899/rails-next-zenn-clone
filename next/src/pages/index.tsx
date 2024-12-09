@@ -1,13 +1,13 @@
 import { Box, Container } from '@mui/material'
 import type { NextPage } from 'next'
-import { styles } from '@/styles'
-import Loading from '@/components/Loading'
-import Error from '@/components/Error'
-import React from 'react'
 import { useRouter } from 'next/router'
-import { ArticlePagination } from '@/components/ArticlePagination'
-import { ArticleCardList } from '@/components/ArticleCardList'
+import React from 'react'
 import { useFetchArticles } from '../../hooks/useFetchArticles'
+import { ArticleCardList } from '@/components/ArticleCardList'
+import { ArticlePagination } from '@/components/ArticlePagination'
+import Error from '@/components/Error'
+import Loading from '@/components/Loading'
+import { styles } from '@/styles'
 
 const Index: NextPage = () => {
   const router = useRouter()
@@ -24,7 +24,7 @@ const Index: NextPage = () => {
 
   return (
     <Box css={styles.pageMinHeight} sx={{ backgroundColor: '#e6f2ff' }}>
-      <Container maxWidth='md' sx={{ pt: 6 }}>
+      <Container maxWidth="md" sx={{ pt: 6 }}>
         <ArticleCardList articles={articles} />
         <ArticlePagination
           count={meta?.totalPages || 0}

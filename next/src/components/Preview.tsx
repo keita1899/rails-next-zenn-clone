@@ -1,16 +1,16 @@
-import { Box, Card, Typography } from "@mui/material"
-import { MarkdownText } from "./MarkdownText"
+import { Box, Card, Typography } from '@mui/material'
+import { MarkdownText } from './MarkdownText'
 
 type PreviewProps = {
   title: string
   content: string
 }
 
-export const Preview = ({title, content}: PreviewProps) => {
+export const Preview = ({ title, content }: PreviewProps) => {
   return (
     <Box sx={{ width: 840 }}>
       <Typography
-        component='h2'
+        component="h2"
         sx={{
           fontSize: { xs: 21, sm: 25 },
           fontWeight: 'bold',

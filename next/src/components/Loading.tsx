@@ -12,7 +12,7 @@ const Loading = () => {
         alignItems: 'center',
       }}
     >
-      <Image src='/loading.svg' width={150} height={150} alt='loading...' />
+      <Image src="/loading.svg" width={150} height={150} alt="loading..." />
     </Box>
   )
 }

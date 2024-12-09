@@ -8,8 +8,8 @@ type SubmitButtonProps = {
 export const SubmitButton = ({ isLoading, text }: SubmitButtonProps) => {
   return (
     <LoadingButton
-      variant='contained'
-      type='submit'
+      variant="contained"
+      type="submit"
       loading={isLoading}
       sx={{ fontWeight: 'bold', color: 'white' }}
     >

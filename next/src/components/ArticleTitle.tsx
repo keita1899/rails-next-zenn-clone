@@ -7,7 +7,7 @@ type ArticleTitleProps = {
 export const ArticleTitle = ({ title }: ArticleTitleProps) => {
   return (
     <Typography
-      component='h2'
+      component="h2"
       sx={{ fontSize: { xs: 21, sm: 25 }, fontWeight: 'bold' }}
     >
       {title}

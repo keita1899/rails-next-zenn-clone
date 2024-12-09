@@ -1,4 +1,3 @@
-import { ArticleIcon } from '@/utils/icons'
 import { Logout } from '@mui/icons-material'
 import {
   Box,
@@ -9,6 +8,7 @@ import {
   Typography,
 } from '@mui/material'
 import Link from 'next/link'
+import { ArticleIcon } from '@/utils/icons'
 
 type HeaderMenuProps = {
   anchorEl: HTMLElement | null
@@ -26,7 +26,7 @@ const HeaderMenu = ({
   return (
     <Menu
       anchorEl={anchorEl}
-      id='account-menu'
+      id="account-menu"
       open={open}
       onClose={handleClose}
       onClick={handleClose}
@@ -35,18 +35,18 @@ const HeaderMenu = ({
         <Typography sx={{ fontWeight: 'bold' }}>{username}</Typography>
       </Box>
       <Divider />
-      <Link href='/current/articles'>
+      <Link href="/current/articles">
         <MenuItem>
           <ListItemIcon>
-            <ArticleIcon fontSize='small' />
+            <ArticleIcon fontSize="small" />
           </ListItemIcon>
           記事の管理
         </MenuItem>
       </Link>
-      <Link href='/sign_out'>
+      <Link href="/sign_out">
         <MenuItem>
           <ListItemIcon>
-            <Logout fontSize='small' />
+            <Logout fontSize="small" />
           </ListItemIcon>
           サインアウト
         </MenuItem>

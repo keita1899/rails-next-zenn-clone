@@ -1,21 +1,21 @@
+import { Box, Container, TextField } from '@mui/material'
+import axios, { AxiosError } from 'axios'
 import { NextPage } from 'next'
-import { useRequireSignedIn } from '../../../../../hooks/useRequireSignin'
 import { useRouter } from 'next/router'
+import { useEffect, useMemo, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import useSWR from 'swr'
 import {
   useSnackbarState,
   useUserState,
 } from '../../../../../hooks/useGlobalState'
-import { useEffect, useMemo, useState } from 'react'
-import useSWR from 'swr'
-import { fetcher } from '@/utils'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import axios, { AxiosError } from 'axios'
+import { useRequireSignedIn } from '../../../../../hooks/useRequireSignin'
+import { ArticleFormHeader } from '@/components/ArticleFormHeader'
 import Error from '@/components/Error'
 import Loading from '@/components/Loading'
-import { Box, Container, TextField } from '@mui/material'
-import { getAuthApiHeaders } from '@/utils/apiHeaders'
 import { Preview } from '@/components/Preview'
-import { ArticleFormHeader } from '@/components/ArticleFormHeader'
+import { fetcher } from '@/utils'
+import { getAuthApiHeaders } from '@/utils/apiHeaders'
 
 type ArticleProps = {
   title: string
@@ -50,7 +50,7 @@ const CurrentArticlesEdit: NextPage = () => {
   const { id } = router.query
   const { data, error } = useSWR(
     user.isSignedIn && id ? url + id : null,
-    fetcher
+    fetcher,
   )
 
   const article: ArticleProps = useMemo(() => {
@@ -136,7 +136,7 @@ const CurrentArticlesEdit: NextPage = () => {
 
   return (
     <Box
-      component='form'
+      component="form"
       onSubmit={handleSubmit(onSubmit)}
       sx={{ backgroundColor: '#EDF2F7', minHeight: '100vh' }}
     >
@@ -148,22 +148,22 @@ const CurrentArticlesEdit: NextPage = () => {
         handleChangeStatusChecked={handleChangeStatusChecked}
       />
       <Container
-        maxWidth='lg'
+        maxWidth="lg"
         sx={{ pt: 11, pb: 3, display: 'flex', justifyContent: 'center' }}
       >
         {!previewChecked && (
           <Box sx={{ width: 840 }}>
             <Box sx={{ mb: 2 }}>
               <Controller
-                name='title'
+                name="title"
                 control={control}
                 render={({ field, fieldState }) => (
                   <TextField
                     {...field}
-                    type='text'
+                    type="text"
                     error={fieldState.invalid}
                     helperText={fieldState.error?.message}
-                    placeholder='Write in Title'
+                    placeholder="Write in Title"
                     fullWidth
                     sx={{ backgroundColor: 'white' }}
                   />
@@ -172,17 +172,17 @@ const CurrentArticlesEdit: NextPage = () => {
             </Box>
             <Box>
               <Controller
-                name='content'
+                name="content"
                 control={control}
                 render={({ field, fieldState }) => (
                   <TextField
                     {...field}
-                    type='textarea'
+                    type="textarea"
                     error={fieldState.invalid}
                     helperText={fieldState.error?.message}
                     multiline
                     fullWidth
-                    placeholder='Write in Markdown Text'
+                    placeholder="Write in Markdown Text"
                     rows={25}
                     sx={{ backgroundColor: 'white' }}
                   />
