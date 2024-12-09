@@ -62,7 +62,7 @@ RSpec.describe "Api::V1::Current::Articles", type: :request do
       end
     end
   end
-  
+
   describe "POST api/v1/current/articles" do
     subject { post(api_v1_current_articles_path, headers:) }
 
